@@ -82,6 +82,7 @@ for i in range(len(questions)):
     score = score+1
   else: 
     print("Wrong")
+    print("Your score is {}{}".format(score, "/20"))
     break
     
   
