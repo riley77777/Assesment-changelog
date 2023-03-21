@@ -20,9 +20,48 @@ print("\u001b[31mcreated by Riley Baxter\n"
 
 
  # Lists
-questions = ["What's 100 ÷ 10?>>","What's the square root of 9>>","What is 7 x 9?","How many sides does a triangle have?","If you have 15 apples and you give 5 to your friend, how many apples do you have left?","What is the value of 3 + 6 - 2?","What is 20 divided by 5?","How many degrees are in a right angle?","If a rectangle is 8 units long and 4 units wide, what is its perimeter?","What is the difference between 10 and 4?","If you have 18 marbles and you want to divide them equally between 3 friends, how many marbles will each friend get?","What is the area of a square with sides of length 6 units?"
+questions = [  "What is 3 multiplied by 4?",
+    "What is the product of 7 and 2?",
+    "If you have 8 groups of 5 apples, how many apples do you have in total?",
+    "What is the result of 9 multiplied by 0?",
+    "If there are 4 people in a room and each person has 2 bags, how many bags are in the room altogether?",
+    "What is the value of 6 multiplied by 9 minus 3?",
+    "If you have 12 cupcakes and you want to give 3 cupcakes to each of your 4 friends, how many cupcakes will you have left?",
+    "What is the product of 8 and 3.5?",
+    "If you have 10 boxes, and each box contains 20 pens, how many pens do you have in total?",
+    "What is the result of 7 multiplied by 1,000?",
+    "If you have 15 packs of gum and each pack contains 10 pieces of gum, how many pieces of gum do you have in total?",
+    "What is the value of 5 multiplied by 3 raised to the power of 2?",
+    "If there are 24 students in a class, and each student has 5 pencils, how many pencils are in the class altogether?",
+    "What is the product of 6.5 and 2.5?",
+    "If you have 3 bags of marbles and each bag contains 12 marbles, how many marbles do you have in total?",
+    "What is the result of 9 multiplied by 99?",
+    "If you have 18 crayons and you want to give 2 crayons to each of your 7 friends, how many crayons will you have left?",
+    "What is the product of 0.5 and 0.2?",
+    "If there are 5 boxes, and each box contains 6 books, how many books do you have in total?",
+    "What is the value of 7 multiplied by 6 raised to the power of 2?"
 ]
-answers = [10,3,63,3,10,7,4,90,24,6,6,36]
+answers = [ 12,
+    14,
+    40,
+    0,
+    8,
+    51,
+    0,
+    28,
+    200,
+    7000,
+    150,
+    45,
+    120,
+    16.25,
+    36,
+    891,
+    4,
+    0.1,
+    30,
+    252]
+   
 # Functions 
 
 
@@ -33,13 +72,18 @@ answers = [10,3,63,3,10,7,4,90,24,6,6,36]
 score = 0 
 for i in range(len(questions)):
   print("Question", i+1, questions[i])
-  answer = int(input("Answer: "))
+  try:
+    answer = int(input("Answer: "))
+  except ValueError:
+    print("Wrong")
+    break
   if answer == answers[i]:
     print("Correct")
     score = score+1
   else: 
     print("Wrong")
-    break 
+    break
+    
   
   
   
