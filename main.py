@@ -15,8 +15,11 @@ print("\u001b[31mcreated by Riley Baxter\n"
       "\u001b[93m██╔████╔██║███████║░░░██║░░░███████║  ██║██╗██║██║░░░██║██║░░███╔═╝\n"
       "\u001b[32m██║╚██╔╝██║██╔══██║░░░██║░░░██╔══██║  ╚██████╔╝██║░░░██║██║██╔══╝░░\n"
       "\u001b[34m██║░╚═╝░██║██║░░██║░░░██║░░░██║░░██║  ░╚═██╔═╝░╚██████╔╝██║███████╗\n"
-      "\u001b[35m╚═╝░░░░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝  ░░░╚═╝░░░░╚═════╝░╚═╝╚══════╝")
+      "\u001b[35m╚═╝░░░░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝  ░░░╚═╝░░░░╚═════╝░╚═╝╚══════╝\n"
+     "\033[37mYou have ten seconds to answer each question\n"
+     "__________________________________________________________________________")
 # Imports 
+import time
 from termcolor import colored
 
  # Lists
@@ -61,29 +64,43 @@ answers = [ 12,
     0.1,
     30,
     252]
+
    
 # Functions 
-
-
-
+def my_timer(timer):
+  for i in range(timer):
+    print(timer)
+    time.sleep(1)
+    timer -= 1
 
 
 # Scripts 
+
 score = 0 
+time_per_question = 10 
+green = (0, 255, 0)
+
 for i in range(len(questions)):
-  print("Question", i+1, questions[i])
-  try:
-    answer = int(input("Answer: "))
-  except ValueError:
-    print("Wrong")
-    break
-  if answer == answers[i]:
-    print("Correct")
-    score = score+1
-  else: 
-    print(colored("Wrong", "red", attrs=["underline", "bold"]))
-    print("Your score is {}{}".format(score, "/20"))
-    break
+    print("Question", i+1, questions[i])
+    start_time = time.time() 
+    try:
+        answer = int(input("Answer: "))
+    except ValueError:
+        print(colored("Wrong", green))
+        break
+    end_time = time.time() 
+    time_taken = end_time - start_time 
+    if time_taken > time_per_question: 
+        print("Time up!")
+        break
+    print("Time taken: {:.2f} seconds".format(time_taken))
+    if answer == answers[i]:
+        print(colored("Correct!~", "green", attrs=["bold"]))
+        score = score+1
+    else: 
+        print("Wrong")
+        break
+print("Your score is {}{}".format(score, "/20"))
     
   
   
