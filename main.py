@@ -17,7 +17,7 @@ print("\u001b[31mcreated by Riley Baxter\n"
       "\u001b[34m██║░╚═╝░██║██║░░██║░░░██║░░░██║░░██║  ░╚═██╔═╝░╚██████╔╝██║███████╗\n"
       "\u001b[35m╚═╝░░░░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝  ░░░╚═╝░░░░╚═════╝░╚═╝╚══════╝")
 # Imports 
-
+from termcolor import colored
 
  # Lists
 questions = [  "What is 3 multiplied by 4?",
@@ -81,7 +81,7 @@ for i in range(len(questions)):
     print("Correct")
     score = score+1
   else: 
-    print("Wrong")
+    print(colored("Wrong", "red", attrs=["underline", "bold"]))
     print("Your score is {}{}".format(score, "/20"))
     break
     
