@@ -16,7 +16,7 @@ print("\u001b[31mcreated by Riley Baxter\n"
       "\u001b[32m██║╚██╔╝██║██╔══██║░░░██║░░░██╔══██║  ╚██████╔╝██║░░░██║██║██╔══╝░░\n"
       "\u001b[34m██║░╚═╝░██║██║░░██║░░░██║░░░██║░░██║  ░╚═██╔═╝░╚██████╔╝██║███████╗\n"
       "\u001b[35m╚═╝░░░░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝  ░░░╚═╝░░░░╚═════╝░╚═╝╚══════╝\n"
-     "\033[37mYou have ten seconds to answer each question\n"
+     "\033[37mYou have 20 seconds to answer each question\n"
      "__________________________________________________________________________")
 # Imports 
 import time
@@ -30,7 +30,7 @@ questions = [  "What is 3 multiplied by 4?",
     "If there are 4 people in a room and each person has 2 bags, how many bags are in the room altogether?",
     "What is the value of 6 multiplied by 9 minus 3?",
     "If you have 12 cupcakes and you want to give 3 cupcakes to each of your 4 friends, how many cupcakes will you have left?",
-    "What is the product of 8 and 3.5?",
+    "What is 8x3?",
     "If you have 10 boxes, and each box contains 20 pens, how many pens do you have in total?",
     "What is the result of 7 multiplied by 1,000?",
     "If you have 15 packs of gum and each pack contains 10 pieces of gum, how many pieces of gum do you have in total?",
@@ -51,7 +51,7 @@ answers = [ 12,
     8,
     51,
     0,
-    28,
+    24,
     200,
     7000,
     150,
@@ -67,40 +67,45 @@ answers = [ 12,
 
    
 # Functions 
-def my_timer(timer):
-  for i in range(timer):
-    print(timer)
-    time.sleep(1)
-    timer -= 1
-
+def play():
+   score = 0 
+   time_per_question = 20 
+   green = (0, 255, 0)
+    
+   start_time = time.time()
+    
+   for i in range(len(questions)):
+        print("Question", i+1, questions[i])
+        start_time2 = time.time()
+        try:
+            answer = int(input("Answer: "))
+        except ValueError:
+            print(colored("Wrong", green))
+            break
+        end_time = time.time() 
+        time_taken = end_time - start_time 
+        if time_taken > time_per_question: 
+            print("Time up!")
+            break
+        print("Time taken: {:.2f} seconds".format(time_taken))
+        if answer == answers[i]:
+            print(colored("Correct!~", "green", attrs=["bold"]))
+            score = score+1
+        else: 
+            print("Wrong")
+        end_time2 = time.time()
+        time_taken2 = end_time2 - start_time2
+        
+   total_time_taken = end_time - start_time
+   print("Total time taken: {:.2f} seconds".format(total_time_taken))
+    
+   return score
+    
 
 # Scripts 
-
-score = 0 
-time_per_question = 10 
-green = (0, 255, 0)
-
-for i in range(len(questions)):
-    print("Question", i+1, questions[i])
-    start_time = time.time() 
-    try:
-        answer = int(input("Answer: "))
-    except ValueError:
-        print(colored("Wrong", green))
-        break
-    end_time = time.time() 
-    time_taken = end_time - start_time 
-    if time_taken > time_per_question: 
-        print("Time up!")
-        break
-    print("Time taken: {:.2f} seconds".format(time_taken))
-    if answer == answers[i]:
-        print(colored("Correct!~", "green", attrs=["bold"]))
-        score = score+1
-    else: 
-        print("Wrong")
-        break
-print("Your score is {}{}".format(score, "/20"))
+final_score = play()
+print("Your score is {}/20".format(final_score))
+print("Total time taken:", )
     
   
   
