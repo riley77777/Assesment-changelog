@@ -67,45 +67,60 @@ answers = [ 12,
 
    
 # Functions 
-def play():
-   score = 0 
-   time_per_question = 20 
-   green = (0, 255, 0)
+
+def display_question(question_number, question):
+    print("Question", question_number, question)
+
+
+def get_answer():
+    try:
+        answer = int(input("Answer: "))
+        return answer
+    except ValueError:
+        print(colored("Wrong","red"))
+        return None
+
+def check_answer(answer, correct_answer):
+    if answer == correct_answer:
+        print(colored("Correct!~", "green", attrs=["bold"]))
+        return True
+    else:
+        print(colored("Wrong","red"))
+        return False
+
+def play_game():
+    score = 0 
+    time_per_question = 20
+    start_time = time.time()
     
-   start_time = time.time()
-    
-   for i in range(len(questions)):
-        print("Question", i+1, questions[i])
-        start_time2 = time.time()
-        try:
-            answer = int(input("Answer: "))
-        except ValueError:
-            print(colored("Wrong", green))
+    for i in range(len(questions)):
+        display_question(i+1, questions[i])
+        answer = get_answer()
+        
+        if answer is None:
             break
+        
         end_time = time.time() 
         time_taken = end_time - start_time 
         if time_taken > time_per_question: 
-            print("Time up!")
+            print(colored("Time up!","red"))
             break
+            
         print("Time taken: {:.2f} seconds".format(time_taken))
-        if answer == answers[i]:
-            print(colored("Correct!~", "green", attrs=["bold"]))
-            score = score+1
+        if check_answer(answer, answers[i]):
+            score += 1
         else: 
-            print("Wrong")
-        end_time2 = time.time()
-        time_taken2 = end_time2 - start_time2
+            break
         
-   total_time_taken = end_time - start_time
-   print("Total time taken: {:.2f} seconds".format(total_time_taken))
+    total_time_taken = end_time - start_time
+    print("Total time taken: {:.2f} seconds".format(total_time_taken))
     
-   return score
+    return score
     
 
 # Scripts 
-final_score = play()
+final_score = play_game()
 print("Your score is {}/20".format(final_score))
-print("Total time taken:", )
     
   
   
