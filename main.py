@@ -16,11 +16,12 @@ print("\u001b[31mcreated by Riley Baxter\n"
       "\u001b[32m██║╚██╔╝██║██╔══██║░░░██║░░░██╔══██║  ╚██████╔╝██║░░░██║██║██╔══╝░░\n"
       "\u001b[34m██║░╚═╝░██║██║░░██║░░░██║░░░██║░░██║  ░╚═██╔═╝░╚██████╔╝██║███████╗\n"
       "\u001b[35m╚═╝░░░░░╚═╝╚═╝░░╚═╝░░░╚═╝░░░╚═╝░░╚═╝  ░░░╚═╝░░░░╚═════╝░╚═╝╚══════╝\n"
-     "\033[37mYou have 20 seconds to answer each question\n"
+     "\033[37mYou have 1 minute to answer each question\n"
      "__________________________________________________________________________")
 # Imports 
 import time
 from termcolor import colored
+import os
 
  # Lists
 questions = [  "What is 3 multiplied by 4?",
@@ -65,9 +66,7 @@ answers = [ 12,
     30,
     252]
 
-   
-# Functions 
-
+# Functions
 def display_question(question_number, question):
     print("Question", question_number, question)
 
@@ -80,6 +79,7 @@ def get_answer():
         print(colored("Wrong","red"))
         return None
 
+
 def check_answer(answer, correct_answer):
     if answer == correct_answer:
         print(colored("Correct!~", "green", attrs=["bold"]))
@@ -88,39 +88,61 @@ def check_answer(answer, correct_answer):
         print(colored("Wrong","red"))
         return False
 
+
 def play_game():
-    score = 0 
-    time_per_question = 20
+    score = 0
+    time_per_question = 60
     start_time = time.time()
-    
+
     for i in range(len(questions)):
         display_question(i+1, questions[i])
         answer = get_answer()
-        
+
         if answer is None:
             break
-        
-        end_time = time.time() 
-        time_taken = end_time - start_time 
-        if time_taken > time_per_question: 
+
+        end_time = time.time()
+        time_taken = end_time - start_time
+        if time_taken > time_per_question:
             print(colored("Time up!","red"))
             break
-            
+
         print("Time taken: {:.2f} seconds".format(time_taken))
         if check_answer(answer, answers[i]):
             score += 1
-        else: 
+        else:
             break
-        
+
     total_time_taken = end_time - start_time
     print("Total time taken: {:.2f} seconds".format(total_time_taken))
-    
+
     return score
-    
+
+
+def read_high_score():
+    if not os.path.exists("high_score.txt"):
+        with open("high_score.txt", "w") as f:
+            f.write("0")
+    with open("high_score.txt", "r") as f:
+        high_score = int(f.read())
+    return high_score
+
+
+def write_high_score(new_high_score):
+    with open("high_score.txt", "w") as f:
+        f.write(str(new_high_score))
+
 
 # Scripts 
 final_score = play_game()
-print("Your score is {}/20".format(final_score))
+print("Your score is {}/{}".format(final_score, len(questions)))
+
+current_high_score = read_high_score()
+print("Your high score is {}/{}".format(current_high_score, len(questions)))
+if final_score > current_high_score:
+    print("New high score!")
+    write_high_score(final_score)
+ 
     
   
   
